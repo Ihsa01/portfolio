@@ -1,0 +1,110 @@
+.navbar {
+    display: flex;
+    background-color: var(--yellow-theme-nav-background-color);
+    height: 80px;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0 20px;
+    font-size: 1.2rem;
+    position: relative; 
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: inherit;
+    padding: 0 20px;
+}
+
+.navbar-container-logo {
+    color: var(--yellow-theme-nav-main-color);
+    font-size: 3rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navbar-container-menu {
+    display: flex;
+    list-style: none;
+    margin-left: auto; 
+    text-align: center;
+    transition: all 0.5s ease;
+}
+
+.navbar-container-menu-item {
+    line-height: 40px;
+    margin-right: 1.5rem;
+    font-size: 1.6rem;
+
+    &::after {
+        content: '';
+        display: block;
+        height: 3px;
+        width: 0;
+        background: transparent;
+        transition: all 0.5s ease;
+    }
+
+    &:hover::after {
+        width: 100%;
+        background: var(--yellow-theme-nav-main-color);
+    }
+}
+
+.navbar-container-menu-item-links {
+    text-decoration: none;
+    color: var(--yellow-theme-nav-main-color);
+    padding: 0.5rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-container-menu-item-links:hover {
+    color: var(--yellow-theme-nav-hover-color);
+}
+
+.nav-icon {
+    display: none; 
+    cursor: pointer;
+    color: var(--yellow-theme-nav-main-color);
+    font-size: 2rem;
+    position: absolute;
+    top: 20px; 
+    right: 20px; 
+    z-index: 1000; 
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar-container-menu {
+    display: none; 
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 250px; 
+    background: #815656;
+    position: absolute;
+    top: 80px;
+    right: 0px; 
+    border: 1px solid var(--yellow-theme-nav-main-color);
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 999;
+        
+    }
+
+    .navbar-container-menu.active {
+        display: flex; 
+    }
+
+    .navbar-container-menu-item{
+        margin: 5px 20px;
+        width: 100%;
+    }
+
+    .nav-icon {
+        display: block; 
+    }
+}

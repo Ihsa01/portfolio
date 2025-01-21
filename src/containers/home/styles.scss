@@ -1,0 +1,44 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    // padding-top: 60px;
+  }
+  
+  .home-content {
+    text-align: center;
+  }
+  
+  h1 {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    font-size: 2rem;
+  }
+
+  .home-image1{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .home-container {
+        flex-direction: column; 
+        padding-top: 80px;
+        padding-bottom: 20px;
+    }
+
+    .home-text, .home-image {
+        flex: unset; 
+        width: 100%; 
+    }
+
+    .home-text {
+        margin-top: 70px;
+        text-align: center; 
+    }
+}
