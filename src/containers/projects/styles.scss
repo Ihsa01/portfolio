@@ -1,0 +1,57 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+h1 {
+    color: #834646;
+    font-family: 'Playfair Display';
+    padding: 30px;
+
+}
+.projects-container {
+    text-align: center;
+    padding: 20px;
+    color: #834646;
+}
+
+.projects-cards {
+    font-family: 'Poppins';
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;  // Ensures the cards wrap on smaller screens
+    gap: 20px;  // Adds space between the cards
+}
+
+.project-card {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);  // Adds a hover effect
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.project-details {
+    padding: 15px;
+}
+
+.project-details h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.project-details p {
+    font-size: 1rem;
+    color: #555;
+}

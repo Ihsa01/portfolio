@@ -1,4 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+
+
 .navbar {
+    font-family: 'Comfortaa', sans-serif; 
     display: flex;
     background-color: var(--yellow-theme-nav-background-color);
     height: 80px;
@@ -18,6 +22,7 @@
 }
 
 .navbar-container-logo {
+    font-family: 'Comfortaa', sans-serif; 
     color: var(--yellow-theme-nav-main-color);
     font-size: 3rem;
     font-weight: bold;
@@ -34,6 +39,7 @@
 }
 
 .navbar-container-menu-item {
+    font-family: 'Comfortaa', sans-serif; 
     line-height: 40px;
     margin-right: 1.5rem;
     font-size: 1.6rem;

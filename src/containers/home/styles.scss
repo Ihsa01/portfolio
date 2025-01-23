@@ -1,44 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Macondo&family=PT+Sans+Narrow:wght@400;700&family=Permanent+Marker&display=swap');
+
+.container {
+  display: list-item;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.container .text {
+  position: relative;
+  color: black;
+  font-size: 30px;
+  font-weight: 600;
+  padding: 5px 0;
+  display: inline-block;
+  padding-left: 40px;
+}
+
+.container .text.first-text {
+  color: #632b2b;
+
+  font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.container .text.sec-text {
+  color: #834646;
+  font-family: 'Macondo', sans-serif;
+}
+
+.text::after {
+  content: '|';
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #834646;
+  animation: blink 0.7s step-end infinite;
+  visibility: hidden;
+}
+
+.text.cursor-visible::after {
+  visibility: visible;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 .home-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-    // padding-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  flex-wrap: wrap;
+  /* Allow wrapping of items on smaller screens */
+}
+
+.home-content {
+  text-align: center;
+  padding-left: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+  /* Add some spacing between text and image */
+}
+
+h1 {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  font-size: 2rem;
+}
+
+.home-image1 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: rght;
+  padding: 20px;
+}
+
+.about-me {
+  padding-left: 20px;
+  color: #333;
+  width: 100%;
+  text-align: left;
+  /* Align about me text to the left */
+  margin-top: 20px;
+  font-size: 20px;
+  width: 50%;
+}
+
+.about-me a {
+  color: #632b2b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.about-me a:hover {
+  text-decoration: underline;
+}
+
+/* Large screen layout */
+
+.container {
+  flex-direction: row;
+  /* Arrange text and image side by side */
+  align-items: flex-start;
+  /* Align content at the top of the screen */
+}
+
+.home-content {
+  text-align: left;
+  /* Align text to the left on larger screens */
+  padding-left: 40px;
+  margin-right: 20px;
+  /* Add space between the text and image */
+}
+
+
+
+
+
+/* Small screen layout */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    /* Stack elements vertically */
+    padding-top: 80px;
+    padding-bottom: 20px;
   }
-  
-  .home-content {
+
+  .home-image1 {
+    width: 100%;
+    padding: 20px 0;
+  }
+
+  .about-me {
+    margin-top: 20px;
     text-align: center;
-  }
-  
-  h1 {
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    font-size: 2rem;
+    font-size: 19px;
+    width: 100%;
+    padding: 30px;
   }
 
-  .home-image1{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  .home-content {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 25px;
   }
-
-  @media (max-width: 768px) {
-    .home-container {
-        flex-direction: column; 
-        padding-top: 80px;
-        padding-bottom: 20px;
-    }
-
-    .home-text, .home-image {
-        flex: unset; 
-        width: 100%; 
-    }
-
-    .home-text {
-        margin-top: 70px;
-        text-align: center; 
-    }
 }
