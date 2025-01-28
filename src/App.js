@@ -5,6 +5,7 @@ import About from './containers/about';
 import Contact from './containers/contact';
 import Projects from './containers/projects';
 import Navbar from './components/navbar';
+import ProjectDetails from "./containers/projectDetails";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/projects' element={<Projects />} />
+                <Route path="/projects/:id" element={<ProjectDetails />} />
                 <Route path='/contact' element={<Contact />} />
             </Routes>
         </div>

@@ -1,41 +1,49 @@
-import React from "react";
-import './styles.scss';  // Make sure to include your styling file
+import React, { useEffect, useState } from "react";
+import './styles.scss';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Projects = () => {
-    const projects = [
-        {
-            title: "Project 1",
-            image: "path_to_image1.jpg",  // Add the correct path to your image
-            description: "Description of Project 1"
-        },
-        {
-            title: "Project 2",
-            image: "path_to_image2.jpg",  // Add the correct path to your image
-            description: "Description of Project 2"
-        },
-        {
-            title: "Project 3",
-            image: "path_to_image3.jpg",  // Add the correct path to your image
-            description: "Description of Project 3"
-        }
-    ];
+    const [projects, setProjects] = useState([]);
+    const navigate = useNavigate(); 
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/projects')
+            .then((response) => {
+                setProjects(response.data.response);
+            })
+            .catch((error) => {
+                console.error('Error fetching projects:', error);
+                setProjects([]);
+            });
+    }, []);
+
+    const handleCardClick = (project) => {
+        navigate(`/projects/${project.id}`, { state: { project } });
+    };
 
     return (
         <div className="projects-container">
             <h1>MY PROJECTS</h1>
             <div className="projects-cards">
-                {projects.map((project, index) => (
-                    <div key={index} className="project-card">
-                        <img src={project.image} alt={project.title} />
+                {Array.isArray(projects) && projects.map((project, index) => (
+                    <div 
+                        key={index} 
+                        className="project-card" 
+                        onClick={() => handleCardClick(project)}
+                    >
+                        <img 
+                            src={project.image} 
+                            alt={project.name} 
+                        />
                         <div className="project-details">
-                            <h3>{project.title}</h3>
-                            <p>{project.description}</p>
+                            <h3>{project.name}</h3>
                         </div>
                     </div>
                 ))}
             </div>
         </div>
     );
-}
+};
 
 export default Projects;

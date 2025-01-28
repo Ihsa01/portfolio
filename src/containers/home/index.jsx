@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import './styles.scss';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/logo11.png';
 import { Link } from "react-router-dom";
 import About from '../about';
 
 const Home = () => {
-  const lines = ["LEET'S CONNECT         ", " HI I'M IHSANA          "]; // Array for multiline text
-  const [displayedText, setDisplayedText] = useState(["", ""]); // Text that will be typed out, one array item per line
-  const [currentLine, setCurrentLine] = useState(0); // Track which line is being typed
-  const speed = 100; // Speed of typewriting effect
-  const pauseBetweenLines = 1000; // Pause before moving to next line
+  const lines = ["HII I'M IHSANA         ", " LET'S CONNECT         "]; 
+  const [displayedText, setDisplayedText] = useState(["", ""]); 
+  const [currentLine, setCurrentLine] = useState(0);
+  const speed = 100; 
+  const pauseBetweenLines = 1000;
 
   useEffect(() => {
     let index = 0;
@@ -40,13 +40,13 @@ const Home = () => {
 
     typeLine(currentLine);
 
-    return () => clearInterval(interval); // Cleanup interval on component unmount
+    return () => clearInterval(interval); 
   }, [currentLine]);
 
   return (
     <div className="home-container">
       <div className="container">
-        <span className="text first-text">{displayedText[0]}</span>
+        <span className="text first-text">{displayedText[0]} <br /></span>
         <span className="text sec-text">
           {displayedText[1]}
         </span>

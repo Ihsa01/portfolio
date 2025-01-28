@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Macondo&family=PT+Sans+Narrow:wght@400;700&family=Permanent+Marker&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Cutive&family=Macondo&family=PT+Sans+Narrow:wght@400;700&family=Permanent+Marker&display=swap');
 
 .container {
   display: list-item;
@@ -19,14 +20,16 @@
 }
 
 .container .text.first-text {
+  margin-top: 80px;
   color: #632b2b;
 
-  font-family: 'PT Sans Narrow', sans-serif;
-}
+  font-family: 'Cutive', sans-serif;}
 
 .container .text.sec-text {
+  display: block;
+  margin-top: 10px;
   color: #834646;
-  font-family: 'Macondo', sans-serif;
+  font-family: 'Cutive', sans-serif;
 }
 
 .text::after {
@@ -56,7 +59,6 @@
   height: 100vh;
   background-color: #f0f0f0;
   flex-wrap: wrap;
-  /* Allow wrapping of items on smaller screens */
 }
 
 .home-content {
@@ -64,7 +66,6 @@
   padding-left: 40px;
   width: 100%;
   margin-bottom: 20px;
-  /* Add some spacing between text and image */
 }
 
 h1 {
@@ -79,6 +80,7 @@ h1 {
   justify-content: center;
   align-items: rght;
   padding: 20px;
+ 
 }
 
 .about-me {
@@ -86,7 +88,6 @@ h1 {
   color: #333;
   width: 100%;
   text-align: left;
-  /* Align about me text to the left */
   margin-top: 20px;
   font-size: 20px;
   width: 50%;
@@ -102,38 +103,31 @@ h1 {
   text-decoration: underline;
 }
 
-/* Large screen layout */
 
 .container {
   flex-direction: row;
-  /* Arrange text and image side by side */
   align-items: flex-start;
-  /* Align content at the top of the screen */
 }
 
 .home-content {
   text-align: left;
-  /* Align text to the left on larger screens */
   padding-left: 40px;
   margin-right: 20px;
-  /* Add space between the text and image */
 }
 
 
 
 
-
-/* Small screen layout */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
-    /* Stack elements vertically */
     padding-top: 80px;
     padding-bottom: 20px;
+  
   }
 
   .home-image1 {
-    width: 100%;
+    width: 80%;
     padding: 20px 0;
   }
 
@@ -142,7 +136,8 @@ h1 {
     text-align: center;
     font-size: 19px;
     width: 100%;
-    padding: 30px;
+    padding: 40px;
+    background-color: #f0f0f0;
   }
 
   .home-content {

@@ -5,6 +5,7 @@
 h1 {
     color: #834646;
     font-family: 'Playfair Display';
+    margin-top: 30px;
     padding: 30px;
 
 }
@@ -12,14 +13,17 @@ h1 {
     text-align: center;
     padding: 20px;
     color: #834646;
+    background-color: #f0f0f0;
+  
+    
 }
 
 .projects-cards {
     font-family: 'Poppins';
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap;  // Ensures the cards wrap on smaller screens
-    gap: 20px;  // Adds space between the cards
+    flex-wrap: wrap;  
+    gap: 20px;  
 }
 
 .project-card {
@@ -33,7 +37,7 @@ h1 {
 }
 
 .project-card:hover {
-    transform: translateY(-10px);  // Adds a hover effect
+    transform: translateY(-10px); 
 }
 
 .project-card img {

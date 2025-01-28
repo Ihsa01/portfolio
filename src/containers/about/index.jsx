@@ -1,23 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import './styles.scss';
-import html from '../../assets/icons/html.svg';
-import css from '../../assets/icons/css.svg';
-import java from '../../assets/icons/java.svg';
-import spring from '../../assets/icons/spring.svg';
-import react from '../../assets/icons/react.svg';
-import python from '../../assets/icons/python.svg';
-import cp from '../../assets/icons/cp.svg';
-import js from '../../assets/icons/js.svg';
-import git from '../../assets/icons/git.svg';
-import sql from '../../assets/icons/sql.svg';
-import image1 from '../../assets/images/devgirl.png';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const About = () => {
+    const [skills, setSkills] = useState([]);
+
+    useEffect(() => {
+        // Fetch skills from backend using Axios
+        axios.get("http://localhost:8080/api/skills")
+            .then(response => {
+                setSkills(response.data);
+            })
+            .catch(error => {
+                console.error("Error fetching skills:", error);
+            });
+    }, []);
+
     return (
         <div className="about-container">
             <div className="about-content">
-                
                 <div className="about">
                     <h1>ABOUT ME</h1>
                     <p>
@@ -26,28 +28,32 @@ const About = () => {
                     </p>
                 </div>
                 <div className="about-image">
-                    <img src={image1} alt="About Me" />
+                    <img src={require('../../assets/images/devgirl.png')} alt="About Me" />
                 </div>
             </div>
+
             <div className="skill-container">
                 <h2>Skills</h2>
                 <div className="skills">
-                    <div className="skill-row">
-                        <img src={react} alt="React" />
-                        <img src={python} alt="Python" />
-                        <img src={java} alt="Java" />
-                        <img src={spring} alt="Spring" />
-                        <img src={cp} alt="C++" />
-                        <img src={git} alt="Git" />
-                    </div>
-                    <div className="skill-row">
-                        <img src={html} alt="HTML" />
-                        <img src={css} alt="CSS" />
-                        <img src={js} alt="JavaScript" />
-                        <img src={sql} alt="SQL" />
-                    </div>
+                    {skills.length > 0 ? (
+                        skills.map(skill => (
+                            <div className="skill-row" key={skill.id}>
+                                <div className="skill">
+                                    <img 
+                                        src={skill.image} 
+                                        alt={skill.name} 
+                                        className="skill-image"
+                                    />
+                                    {/* <h3>{skill.name}</h3> */}
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p>Loading skills...</p>
+                    )}
                 </div>
             </div>
+
             <section className="education-section">
                 <h2>Education</h2>
                 <div className="education-columns">
