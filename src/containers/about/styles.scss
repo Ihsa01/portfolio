@@ -49,6 +49,12 @@ p {
     border-bottom: 1px solid #834646;
     text-align: center;
 }
+.skill-container h2 {
+    font-family: 'Playfair Display', sans-serif;
+    font-size: 2.4rem;
+    color: #834646;
+    margin: 20px;
+}
 
 .skills {
     display: flex;
@@ -59,6 +65,7 @@ p {
 }
 
 .skill {
+    
     position: relative;
     text-align: center;
     margin: 5px;
@@ -103,7 +110,8 @@ p {
 }
 
 .education-section h2 {
-    font-size: 2rem;
+    font-family: 'Playfair Display', sans-serif;
+    font-size: 2.4rem;
     color: #834646;
     margin-bottom: 30px;
 }
@@ -125,14 +133,16 @@ p {
 }
 
 .education-box h3 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 1.4rem;
     color: #632b2b;
     margin-bottom: 10px;
+    font-weight: 800;
 }
 
 .education-box p {
     font-size: 1.1rem;
-    color: #555;
+    color: #4d4c4c;
 }
 @media (max-width: 768px) {
     .about-content {
