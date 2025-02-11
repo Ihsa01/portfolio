@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Modal from "react-modal";
 import "./ProjectManagement.css";
+
+Modal.setAppElement('#root');
 
 const ProjectManagement = () => {
     const [projects, setProjects] = useState([]);
@@ -10,9 +13,14 @@ const ProjectManagement = () => {
     const [showAddForm, setShowAddForm] = useState(false);
     const [newProject, setNewProject] = useState({ name: "", description: "", image: null });
 
-    // State for edit project form
     const [editProject, setEditProject] = useState(null);
     const [editFormData, setEditFormData] = useState({ name: "", description: "", image: "" });
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [projectToDelete, setProjectToDelete] = useState(null);
+
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
 
     useEffect(() => {
         fetchProjects();
@@ -48,19 +56,19 @@ const ProjectManagement = () => {
             setShowAddForm(false);
             setNewProject({ name: "", description: "", image: null });
             fetchProjects(); // Refresh the list
+            showAlert("Project added successfully!");
         } catch (err) {
             console.error("Error adding project:", err);
-            alert("Failed to add project");
+            showAlert("Failed to add project");
         }
     };
 
-    // Handle Edit Click
     const handleEdit = async (project) => {
-        setEditProject(project.id); // Track which project is being edited
+        setEditProject(project.id);
         setEditFormData({
             name: project.name,
-            description: project.description,  // Set default description value
-            image: null // You can set the image as null or any appropriate default value
+            description: project.description,
+            image: null
         });
         try {
             const response = await axios.get(`http://localhost:8080/api/projects/${project.id}`);
@@ -68,51 +76,70 @@ const ProjectManagement = () => {
             setEditFormData(response.data);
         } catch (err) {
             console.error("Error fetching project details:", err);
-            alert("Failed to load project details");
+            showAlert("Failed to load project details");
         }
     };
 
-    // Handle Update
     const handleUpdate = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
 
-        // Only add fields that are changed or provided
         if (editFormData.name) formData.append("name", editFormData.name);
         if (editFormData.description) formData.append("description", editFormData.description);
 
-        // If an image file is selected, add it to FormData
         if (editFormData.image) formData.append("image", editFormData.image);
 
         try {
-            // Perform the PUT request with the FormData
             await axios.put(
                 `http://localhost:8080/api/projects/${editProject}`,
                 formData,
                 { headers: { 'Content-Type': 'multipart/form-data' } }
             );
 
-            // Reset form and fetch the updated projects list
-            setEditProject(null); // Close the edit form
-            fetchProjects(); // Refresh the list
+            setEditProject(null);
+            fetchProjects();
+            showAlert("Project updated successfully!");
         } catch (err) {
             console.error("Error updating project:", err);
-            alert("Failed to update project");
+            showAlert("Failed to update project");
         }
     };
 
-
-    const handleDelete = async (projectId) => {
-        if (window.confirm("Are you sure you want to delete this project?")) {
+    const handleDelete = async () => {
+        if (projectToDelete) {
             try {
-                await axios.delete(`http://localhost:8080/api/projects/${projectId}`);
+                await axios.delete(`http://localhost:8080/api/projects/${projectToDelete}`);
                 fetchProjects();
+                setShowDeleteModal(false);
+                showAlert("Project deleted successfully!");
             } catch (err) {
                 console.error("Error deleting project:", err);
-                alert("Failed to delete project");
+                showAlert("Failed to delete project");
             }
         }
+    };
+
+    const showAlert = (message) => {
+        setModalMessage(message);
+        setShowModal(true);
+        setTimeout(() => {
+            setShowModal(false);
+        }, 4000);
+    };
+
+    const handleCancelDelete = () => {
+        setShowDeleteModal(false);
+    };
+
+    const handleCancelAdd = () => {
+        setShowAddForm(false);
+        setNewProject({ name: "", description: "", image: null });
+    };
+
+    const handleCancelEdit = () => {
+        setEditProject(null);
+        setEditFormData({ name: "", description: "", image: "" });
     };
 
     if (loading) return <div>Loading projects...</div>;
@@ -127,7 +154,6 @@ const ProjectManagement = () => {
                 </button>
             </div>
 
-            {/* Add Project Form */}
             {showAddForm && (
                 <form className="add-project-form" onSubmit={handleAddProject}>
                     <input
@@ -148,6 +174,14 @@ const ProjectManagement = () => {
                         onChange={(e) => setNewProject({ ...newProject, image: e.target.files[0] })}
                     />
                     <button type="submit" className="save-btn">Add Project</button>
+                    <button
+                        type="button"
+                        className="cancel-btn"
+                        style={{ backgroundColor: "grey" }}
+                        onClick={handleCancelAdd}
+                    >
+                        Cancel
+                    </button>
                 </form>
             )}
 
@@ -166,14 +200,13 @@ const ProjectManagement = () => {
                             <td>{project.name}</td>
                             <td>
                                 <button className="edit-btn" onClick={() => handleEdit(project)}>Edit</button>
-                                <button className="delete-btn" onClick={() => handleDelete(project.id)}>Delete</button>
+                                <button className="delete-btn" onClick={() => { setShowDeleteModal(true); setProjectToDelete(project.id); }}>Delete</button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
 
-            {/* Edit Form */}
             {editProject && (
                 <div className="edit-project-form">
                     <h3>Edit Project</h3>
@@ -186,7 +219,7 @@ const ProjectManagement = () => {
                         />
                         <textarea
                             placeholder="Project Description"
-                            value={editFormData.description}  // Default to project description
+                            value={editFormData.description}
                             onChange={(e) => setEditFormData({ ...editFormData, description: e.target.value })}
                         />
 
@@ -195,10 +228,36 @@ const ProjectManagement = () => {
                             onChange={(e) => setEditFormData({ ...editFormData, image: e.target.files[0] })}
                         />
                         <button type="submit" className="save-btn">Save Changes</button>
-                        <button type="button" className="cancel-btn" onClick={() => setEditProject(null)}>Cancel</button>
+                        <button type="button" className="cancel-btn" onClick={handleCancelEdit}>Cancel</button>
                     </form>
                 </div>
             )}
+
+            <Modal
+                isOpen={showDeleteModal}
+                onRequestClose={handleCancelDelete}
+                contentLabel="Confirm Delete"
+                className="confirm-delete-modal"
+                overlayClassName="confirm-delete-overlay"
+            >
+                <div className="modal-content">
+                    <h3>Are you sure you want to delete this project?</h3>
+                    <button className="confirm-btn" onClick={handleDelete}>Yes, Delete</button>
+                    <button className="cancel-btn" onClick={handleCancelDelete}>Cancel</button>
+                </div>
+            </Modal>
+
+            <Modal
+                isOpen={showModal}
+                onRequestClose={() => setShowModal(false)}
+                contentLabel="Alert Modal"
+                className="alert-modal"
+                overlayClassName="alert-modal-overlay"
+            >
+                <div className="alert-modal-content">
+                    <p>{modalMessage}</p>
+                </div>
+            </Modal>
         </div>
     );
 };

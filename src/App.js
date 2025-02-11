@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Home from './containers/home';
 import About from './containers/about';
 import Contact from './containers/contact';
@@ -9,16 +9,15 @@ import ProjectDetails from "./containers/projectDetails";
 import AdminPanel from './containers/AdminPanel';
 import Login from './containers/Login';
 import ProtectedRoute from './components/ProtectedRoute';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 function AppContent() {
-    const location = useLocation();  // Get current route
-
-    // Hide Navbar on login and admin pages
-    const hideNavbar = location.pathname.startsWith('/admin') || location.pathname === '/login';
+    const location = useLocation();  
+    const hideNavbar = location.pathname.startsWith('/admin') || location.pathname === '/login' || location.pathname === '/error';
 
     return (
         <div className="App">
-            {!hideNavbar && <Navbar />}  {/* Conditionally render Navbar */}
+            {!hideNavbar && <Navbar />}  
             
             <Routes>
                 <Route path='/' element={<Home />} />
@@ -36,6 +35,8 @@ function AppContent() {
                         </ProtectedRoute>
                     } 
                 />
+                <Route path="*" element={<Navigate to="/error" />} />
+                <Route path="/error" element={<ErrorPage />} />
             </Routes>
         </div>
     );

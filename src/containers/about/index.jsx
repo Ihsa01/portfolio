@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import fallback from '../../assets/icons/fallbackSkill.svg'
 
 const About = () => {
-    const [skills, setSkills] = useState([]); // Initialize as an empty array
-    const [education, setEducation] = useState([]); // Initialize as an empty array
+    const [skills, setSkills] = useState([]); 
+    const [education, setEducation] = useState([]); 
 
     // Fetch skills
     useEffect(() => {
@@ -16,11 +16,10 @@ const About = () => {
             })
             .catch(error => {
                 console.error("Error fetching skills:", error);
-                setSkills([]); // Fallback to an empty array on error
+                setSkills([]); 
             });
     }, []);
 
-    // Fetch education
     useEffect(() => {
         axios.get("http://localhost:8080/api/education")
             .then(response => {
@@ -28,7 +27,7 @@ const About = () => {
             })
             .catch(error => {
                 console.error("Error fetching education:", error);
-                setEducation([]); // Fallback to an empty array on error
+                setEducation([]); 
             });
     }, []);
 
@@ -63,7 +62,7 @@ const About = () => {
                                             e.target.src = fallback;
                                         }}
                                     />
-                                    {/* <h3>{skill.name}</h3> */}
+                                  
                                 </div>
                             </div>
                         ))

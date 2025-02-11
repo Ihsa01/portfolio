@@ -1,7 +1,7 @@
-/* Existing styles remain unchanged */
+
 .project-management {
     position: relative;
-    z-index: 3; /* Add z-index */
+    z-index: 3; 
     width: 100%;
     height: 100%;
 }
@@ -49,8 +49,6 @@
     background-color: #f44336;
     color: white;
 }
-
-/* Add button styles */
 .add-button {
     background-color: #4CAF50;
     color: white;
@@ -60,7 +58,6 @@
     cursor: pointer;
 }
 
-/* Close Button */
 .close-btn {
     position: absolute;
     top: 10px;
@@ -76,7 +73,6 @@
     color: #000;
 }
 
-/* Form Group */
 .form-group {
     margin-bottom: 16px;
 }
@@ -96,13 +92,11 @@
     border-radius: 4px;
 }
 
-/* Textarea Resizing */
 .form-group textarea {
     height: 100px;
     resize: vertical;
 }
 
-/* Modal Buttons */
 .modal-actions {
     display: flex;
     justify-content: flex-end;
@@ -128,10 +122,9 @@
     color: white;
 }
 
-/* Dropdown Style */
 .form-group select {
     cursor: pointer;
-}/* Add Project Form */
+}
 .add-project-form {
     display: flex;
     flex-direction: column;
@@ -156,7 +149,6 @@
     cursor: pointer;
   }
   
-  /* Edit Project Form */
   .edit-project-form {
     background-color: #f9f9f9;
     padding: 20px;
@@ -177,7 +169,6 @@
     padding: 8px 16px;
   }
   
-/* Inline Edit */
 .projects-table select,
 .projects-table input {
     margin-left: 5px;
@@ -186,37 +177,31 @@
     border-radius: 4px;
 }
 
-/* Responsive Design */
-/* Mobile & Tablet Adjustments */
 @media (max-width: 768px) {
-    /* Adjust main content when sidebar is open */
     .main-content {
-        margin-left: 0; /* Sidebar hidden, use full screen */
+        margin-left: 0; 
     }
 
-    /* Hide content when sidebar is open on mobile */
     .sidebar.open + .main-content {
         visibility: hidden;
-        display: block; /* Show content when sidebar is open */
-        margin-left: 0; /* Occupy the entire screen */
+        display: block; 
+        margin-left: 0;
     }
     .sidebar.hidden + .main-content {
         visibility: visible;
-        margin-left: 0; /* No margin when sidebar is hidden */
+        margin-left: 0;
     }
 
-    /* Adjust content when sidebar is hidden */
     .sidebar.hidden + .main-content {
-        width: 100vw; /* Main content should take the full screen width when sidebar is closed */
+        width: 100vw; 
     }
-    /* Adjust header layout for smaller screens */
     .header {
         flex-direction: column;
         align-items: flex-start;
     }
 
     .projects-table {
-        font-size: 0.9rem; /* Smaller font size for tables */
+        font-size: 0.9rem; 
     }
 
     .projects-table th,
@@ -231,7 +216,6 @@
         width: 100%;
     }
 
-    /* Add some space for forms and buttons */
     .form-group {
         margin-bottom: 12px;
     }
@@ -241,12 +225,11 @@
     }
 }
 
-/* Very Small Screens (smaller than 576px) */
 @media (max-width: 576px) {
     .sidebar.open + .main-content {
         visibility: hidden;
-        display: block; /* Show content when sidebar is open */
-        margin-left: 0; /* Occupy the entire screen */
+        display: block; 
+        margin-left: 0; 
     }
     .sidebar.hidden + .main-content {
         visibility: visible;
@@ -259,14 +242,14 @@
     }
     .projects-table th,
     .projects-table td {
-        font-size: 0.8rem; /* Smaller font size for very small screens */
-        padding: 8px;
+        font-size: 0.8rem;
+         padding: 8px;
     }
 
     .projects-table select,
     .projects-table input {
-        font-size: 0.8rem; /* Smaller select/input fields */
-    }
+        font-size: 0.8rem;   
+     }
 
     .add-button,
     .edit-btn,
@@ -278,3 +261,72 @@
         font-size: 18px;
     }
 }
+.confirm-delete-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirm-delete-modal {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 250px;
+}
+
+.confirm-delete-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.confirm-delete-modal button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.confirm-delete-modal button.cancel-btn {
+    background-color: #f44336;
+}
+
+.confirm-delete-modal button.confirm-btn {
+    background-color: #28a745;
+}
+
+/* Alert Modal Styles */
+.alert-modal-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-modal {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 200px;
+}
+
+.alert-modal-content p {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+

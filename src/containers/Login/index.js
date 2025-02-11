@@ -9,18 +9,17 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // Check if user is already logged in
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
-      navigate("/admin"); // Redirect to admin panel
+      navigate("/admin/user"); 
     }
   }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (await login(username, password)) {
-      navigate("/admin");
+      navigate("/admin/user");
     } else {
       alert("Invalid credentials");
     }
@@ -34,12 +33,16 @@ const Login = () => {
           type="text"
           placeholder="Username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          required
+          onChange={(e) => setUsername(e.target.value)
+            
+          }
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>

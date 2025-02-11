@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Modal from "react-modal";
 import "./SkillManagement.css";
+
+Modal.setAppElement('#root');
 
 const SkillManagement = () => {
     const [skills, setSkills] = useState([]);
@@ -12,6 +15,11 @@ const SkillManagement = () => {
     
     const [editSkill, setEditSkill] = useState(null);
     const [editFormData, setEditFormData] = useState({ name: "", image: null });
+    
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [skillToDelete, setSkillToDelete] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
 
     useEffect(() => {
         fetchSkills();
@@ -30,6 +38,14 @@ const SkillManagement = () => {
         }
     };
 
+    const showAlert = (message) => {
+        setModalMessage(message);
+        setShowModal(true);
+        setTimeout(() => {
+            setShowModal(false);
+        }, 3000);
+    };
+
     const handleAddSkill = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -45,9 +61,10 @@ const SkillManagement = () => {
             setShowAddForm(false);
             setNewSkill({ name: "", image: null });
             fetchSkills();
+            showAlert("Skill added successfully!");
         } catch (err) {
             console.error("Error adding skill:", err);
-            alert("Failed to add skill");
+            showAlert("Failed to add skill");
         }
     };
 
@@ -73,22 +90,31 @@ const SkillManagement = () => {
             );
             setEditSkill(null);
             fetchSkills();
+            showAlert("Skill updated successfully!");
         } catch (err) {
             console.error("Error updating skill:", err);
-            alert("Failed to update skill");
+            showAlert("Failed to update skill");
         }
     };
 
-    const handleDelete = async (skillId) => {
-        if (window.confirm("Are you sure you want to delete this skill?")) {
+    const handleDelete = async () => {
+        if (skillToDelete) {
             try {
-                await axios.delete(`http://localhost:8080/api/skills/${skillId}`);
+                await axios.delete(`http://localhost:8080/api/skills/${skillToDelete}`);
                 fetchSkills();
+                setShowDeleteModal(false);
+                showAlert("Skill deleted successfully!");
             } catch (err) {
                 console.error("Error deleting skill:", err);
-                alert("Failed to delete skill");
+                showAlert("Failed to delete skill");
             }
         }
+    };
+
+    const handleCancelDelete = () => {
+        setShowDeleteModal(false);
+        setNewSkill({ name: "", image: null });
+        setEditFormData({ name: "", image: null });
     };
 
     if (loading) return <div>Loading skills...</div>;
@@ -139,7 +165,7 @@ const SkillManagement = () => {
                             <td>{skill.name}</td>
                             <td>
                                 <button className="edit-btn" onClick={() => handleEdit(skill)}>Edit</button>
-                                <button className="delete-btn" onClick={() => handleDelete(skill.id)}>Delete</button>
+                                <button className="delete-btn" onClick={() => { setShowDeleteModal(true); setSkillToDelete(skill.id); }}>Delete</button>
                             </td>
                         </tr>
                     ))}
@@ -165,6 +191,32 @@ const SkillManagement = () => {
                     </form>
                 </div>
             )}
+
+            <Modal
+                isOpen={showDeleteModal}
+                onRequestClose={() => setShowDeleteModal(false)}
+                contentLabel="Confirm Delete"
+                className="confirm-delete-modal"
+                overlayClassName="confirm-delete-overlay"
+            >
+                <div className="modal-content">
+                    <h3>Are you sure you want to delete this skill?</h3>
+                    <button className="confirm-btn" onClick={handleDelete}>Yes, Delete</button>
+                    <button className="cancel-btn" onClick={handleCancelDelete}>Cancel</button>
+                </div>
+            </Modal>
+
+            <Modal
+                isOpen={showModal}
+                onRequestClose={() => setShowModal(false)}
+                contentLabel="Alert Modal"
+                className="alert-modal"
+                overlayClassName="alert-modal-overlay"
+            >
+                <div className="alert-modal-content">
+                    <p>{modalMessage}</p>
+                </div>
+            </Modal>
         </div>
     );
 };

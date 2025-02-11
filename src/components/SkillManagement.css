@@ -94,3 +94,74 @@
     border: 1px solid #ddd;
     border-radius: 4px;
   }
+
+.alert-modal-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.alert-modal {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 200px;
+}
+
+.alert-modal-content p {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+.confirm-delete-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.confirm-delete-modal {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 250px;
+}
+
+.confirm-delete-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.confirm-delete-modal button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.confirm-delete-modal .cancel-btn {
+    background-color: #dc3545;
+}
+
+.confirm-delete-modal .confirm-btn {
+    background-color: #28a745;
+}
+
+
