@@ -10,12 +10,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'npm install'
+                sh 'npm ci --legacy-peer-deps'
             }
         }
         stage('Test') {
             steps {
-                sh 'npm test'
+                sh 'npm test -- --watchAll=false'
             }
         }
         stage('Deploy') {
