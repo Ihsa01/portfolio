@@ -6,6 +6,13 @@ pipeline {
                 deleteDir() // clean old workspace first
             }
         }
+        stage('Verify Checkout') {
+            steps {
+                echo '--- Verifying package.json ---'
+                sh 'cat package.json | grep react-router-dom || echo "react-router-dom not found!"'
+                echo '----------------------------'
+            }
+        }
         stage('Checkout') {
             steps {
                 git branch: 'main',
