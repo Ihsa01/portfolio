@@ -1,16 +1,16 @@
 pipeline {
     agent any
     stages {
+        stage('Clean') {
+            steps {
+                deleteDir() // clean old workspace first
+            }
+        }
         stage('Checkout') {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/Ihsa01/portfolio',
                     credentialsId: 'github-token1'
-            }
-        }
-        stage('Clean') {
-            steps {
-                deleteDir()
             }
         }
         stage('Build') {
