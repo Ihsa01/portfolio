@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'npm cache clean --force'
+                sh 'rm -rf node_modules package-lock.json'
                 sh 'npm install --legacy-peer-deps'
             }
         }
