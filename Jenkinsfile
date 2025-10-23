@@ -1,11 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Clean') {
-            steps {
-                deleteDir() // clean old workspace first
-            }
-        }
         stage('Verify Checkout') {
             steps {
                 echo '--- Verifying package.json ---'
