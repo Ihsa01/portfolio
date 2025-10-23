@@ -8,6 +8,11 @@ pipeline {
                     credentialsId: 'github-token1'
             }
         }
+        stage('Clean') {
+            steps {
+                deleteDir()
+            }
+        }
         stage('Build') {
             steps {
                 sh 'npm install --legacy-peer-deps'
