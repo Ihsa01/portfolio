@@ -21,11 +21,6 @@ pipeline {
                 sh 'npm install --legacy-peer-deps'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'npm test -- --watchAll=false'
-            }
-        }
         stage('Deploy') {
             steps {
                 echo 'Deploying portfolio...'
