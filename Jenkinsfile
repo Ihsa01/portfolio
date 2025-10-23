@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+        stage('Clean') {
+            steps {
+                deleteDir() // clean old workspace first
+            }
+        }
         stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -10,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'npm --legacy-peer-deps'
+                sh 'npm install --legacy-peer-deps'
             }
         }
         stage('Test') {
