@@ -9,7 +9,7 @@ pipeline {
         stage('Verify Checkout') {
             steps {
                 echo '--- Verifying package.json ---'
-                sh 'cat package.json | grep react-router-dom || echo "react-router-dom not found!"'
+                sh 'ls -la'
                 echo '----------------------------'
             }
         }
